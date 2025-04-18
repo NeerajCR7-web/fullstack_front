@@ -1,17 +1,39 @@
 import React, { useEffect, useState } from 'react';
+import './Projects.css'; // if you have separate styles
 
 export default function Projects() {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/projects`)
-    .then(res => {
-        if (!res.ok) throw new Error('Network response was not ok');
+    const url = `${import.meta.env.VITE_API_BASE_URL}/api/projects`;
+    console.log('⦿ fetching projects from:', url);
+
+    fetch(url)
+      .then(res => {
+        if (!res.ok) throw new Error(`Network response was not ok (${res.status})`);
         return res.json();
       })
-      .then(data => setProjects(data))
-      .catch(err => console.error('Error fetching projects:', err));
+      .then(data => {
+        console.log('⦿ projects payload:', data);
+        setProjects(data);
+      })
+      .catch(err => {
+        console.error('Error fetching projects:', err);
+        setError(err);
+        setProjects([]);  // stop loading
+      });
   }, []);
+
+  if (error) {
+    return <section className="projects"><p className="error">Failed to load projects.</p></section>;
+  }
+  if (projects === null) {
+    return <section className="projects"><p>Loading projects…</p></section>;
+  }
+  if (projects.length === 0) {
+    return <section className="projects"><p>No projects found.</p></section>;
+  }
 
   return (
     <section className="projects">

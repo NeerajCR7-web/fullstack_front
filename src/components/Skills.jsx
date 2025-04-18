@@ -2,29 +2,41 @@ import React, { useEffect, useState } from 'react';
 import './Skills.css';
 
 export default function Skills() {
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState(null);       // null = loading
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // build the full URL from your env var
     const url = `${import.meta.env.VITE_API_BASE_URL}/api/skills`;
-    // log it so you can see exactly what’s being requested
     console.log('⦿ fetching skills from:', url);
-  
+
     fetch(url)
       .then(res => {
-        if (!res.ok) throw new Error('Network response was not ok');
+        if (!res.ok) throw new Error(`Network response was not ok (${res.status})`);
         return res.json();
       })
-      .then(data => setSkills(data))
-      .catch(err => console.error('Error fetching skills:', err));
+      .then(data => {
+        console.log('⦿ skills payload:', data);
+        setSkills(data);
+      })
+      .catch(err => {
+        console.error('Error fetching skills:', err);
+        setError(err);
+        setSkills([]);  // stop loading
+      });
   }, []);
 
-  // Map proficiency labels to a percentage
-  const profMap = {
-    Beginner: 40,
-    Intermediate: 70,
-    Advanced: 100
-  };
+  // Map proficiency labels to percent
+  const profMap = { Beginner: 40, Intermediate: 70, Advanced: 100 };
+
+  if (error) {
+    return <section className="skills"><p className="error">Failed to load skills.</p></section>;
+  }
+  if (skills === null) {
+    return <section className="skills"><p>Loading skills…</p></section>;
+  }
+  if (skills.length === 0) {
+    return <section className="skills"><p>No skills found.</p></section>;
+  }
 
   return (
     <section className="skills">
@@ -36,13 +48,8 @@ export default function Skills() {
             <div className="skill-card" key={s._id}>
               <h3>{s.name}</h3>
               <div className="bar-container">
-                <div
-                  className="bar-fill"
-                  style={{ width: `${pct}%` }}
-                >
-                  <span className="bar-label">
-                    {s.proficiency}
-                  </span>
+                <div className="bar-fill" style={{ width: `${pct}%` }}>
+                  <span className="bar-label">{s.proficiency}</span>
                 </div>
               </div>
             </div>
