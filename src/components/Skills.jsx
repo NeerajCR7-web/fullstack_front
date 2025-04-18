@@ -5,7 +5,13 @@ export default function Skills() {
   const [skills, setSkills] = useState([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/skills`)      .then(res => {
+    // build the full URL from your env var
+    const url = `${import.meta.env.VITE_API_BASE_URL}/api/skills`;
+    // log it so you can see exactly what’s being requested
+    console.log('⦿ fetching skills from:', url);
+  
+    fetch(url)
+      .then(res => {
         if (!res.ok) throw new Error('Network response was not ok');
         return res.json();
       })
