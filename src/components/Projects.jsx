@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import './Projects.css'; // if you have separate styles
+import './Projects.css';
 
 export default function Projects() {
-  const [projects, setProjects] = useState(null);
+  const [projects, setProjects] = useState(null);  // null = loading
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -11,6 +11,7 @@ export default function Projects() {
 
     fetch(url)
       .then(res => {
+        console.log('⦿ projects response status:', res.status);
         if (!res.ok) throw new Error(`Network response was not ok (${res.status})`);
         return res.json();
       })
@@ -26,13 +27,25 @@ export default function Projects() {
   }, []);
 
   if (error) {
-    return <section className="projects"><p className="error">Failed to load projects.</p></section>;
+    return (
+      <section className="projects">
+        <p className="error">Failed to load projects.</p>
+      </section>
+    );
   }
   if (projects === null) {
-    return <section className="projects"><p>Loading projects…</p></section>;
+    return (
+      <section className="projects">
+        <p>Loading projects…</p>
+      </section>
+    );
   }
   if (projects.length === 0) {
-    return <section className="projects"><p>No projects found.</p></section>;
+    return (
+      <section className="projects">
+        <p>No projects found.</p>
+      </section>
+    );
   }
 
   return (

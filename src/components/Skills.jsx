@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Skills.css';
 
 export default function Skills() {
-  const [skills, setSkills] = useState(null);       // null = loading
+  const [skills, setSkills] = useState(null);  // null = loading
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -11,6 +11,7 @@ export default function Skills() {
 
     fetch(url)
       .then(res => {
+        console.log('⦿ skills response status:', res.status);
         if (!res.ok) throw new Error(`Network response was not ok (${res.status})`);
         return res.json();
       })
@@ -29,13 +30,25 @@ export default function Skills() {
   const profMap = { Beginner: 40, Intermediate: 70, Advanced: 100 };
 
   if (error) {
-    return <section className="skills"><p className="error">Failed to load skills.</p></section>;
+    return (
+      <section className="skills">
+        <p className="error">Failed to load skills.</p>
+      </section>
+    );
   }
   if (skills === null) {
-    return <section className="skills"><p>Loading skills…</p></section>;
+    return (
+      <section className="skills">
+        <p>Loading skills…</p>
+      </section>
+    );
   }
   if (skills.length === 0) {
-    return <section className="skills"><p>No skills found.</p></section>;
+    return (
+      <section className="skills">
+        <p>No skills found.</p>
+      </section>
+    );
   }
 
   return (
