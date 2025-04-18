@@ -1,0 +1,51 @@
+.skills {
+    padding: 2rem 1rem;
+  }
+  
+  .skills h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #0056b3;
+  }
+  
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  /* Skill Card */
+  .skill-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  /* Progress Bar Track */
+  .bar-container {
+    background: #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 0.75rem;
+    height: 24px;
+  }
+  
+  /* Progress Bar Fill */
+  .bar-fill {
+    background: var(--primary-color);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    transition: width 0.6s ease;
+  }
+  
+  /* Label Inside Bar */
+  .bar-label {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  

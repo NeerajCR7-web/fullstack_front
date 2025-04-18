@@ -1,0 +1,147 @@
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #0056b3;
+  --bg-color: #f4f4f9;
+  --text-color: #333;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* MAIN SECTIONS */
+main > section {
+  padding: 2rem 0;
+  width: 100%;
+}
+
+/* ALTERNATING BACKGROUNDS */
+main > section:nth-child(odd) {
+  background: #ffffff;
+}
+main > section:nth-child(even) {
+  background: #f0f8ff; /* very light blue */
+}
+
+/* HEADER WITH GRADIENT */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #007bff 0%, #00bfff 100%);
+  color: #fff;
+  border-radius: 12px;
+}
+.header h1,
+.header p {
+  color: #fff;
+}
+
+/* GRID LAYOUTS */
+.project-grid,
+.skills-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+.project-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+.skills-grid {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* CARDS */
+.project-card,
+.skill-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.project-card:hover,
+.skill-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+.project-card img {
+  width: 100%;
+  display: block;
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: background 0.3s, transform 0.2s;
+}
+.btn:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+/* CONTACT FORM */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.contact-form label {
+  margin-top: 1rem;
+  font-weight: 500;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+.contact-form button {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.contact-form button:hover {
+  background: var(--secondary-color);
+}
