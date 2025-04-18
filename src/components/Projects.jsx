@@ -4,8 +4,8 @@ export default function Projects() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    fetch('/api/projects')
-      .then(res => {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/projects`)
+    .then(res => {
         if (!res.ok) throw new Error('Network response was not ok');
         return res.json();
       })
