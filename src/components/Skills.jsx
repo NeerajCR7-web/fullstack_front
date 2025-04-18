@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Skills.css';
 
+console.log('⦿ VITE_API_BASE_URL =', import.meta.env.VITE_API_BASE_URL);
+
 export default function Skills() {
   const [skills, setSkills] = useState(null);  // null = loading
   const [error, setError] = useState(null);
